@@ -17,10 +17,13 @@ class Command(BaseCommand):
         self.stdout.write('waiting for database...')
         db_up =  False
         while db_up is False:
+            # import pdb; pdb.set_trace()
             try:
                 self.check(databases=['default'])
+                
                 db_up = True
             except (Psycopg2OpError,OperationalError):
+                
                 self.stdout.write('database unavailable, waiting for 1sec...')
                 time.sleep(1)
         
